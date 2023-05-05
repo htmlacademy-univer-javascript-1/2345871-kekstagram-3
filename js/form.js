@@ -1,7 +1,11 @@
-import { makeListeners, removeListener } from './effects.js';
-const imageForm = document.querySelector('.img-upload__form');
-const imageOverlay = imageForm.querySelector('.img-upload__overlay');
-const closeButton = imageForm.querySelector('#upload-cancel');
+import { makeListener, removeListener} from './effects.js';
+import { isEscapeKey } from './utils.js';
+import { resize } from './scale.js';
+
+
+const imgForm = document.querySelector('.img-upload__form');
+const closeButton = imgForm.querySelector('#upload-cancel');
+export const imgOverlay = imgForm.querySelector('.img-upload__overlay');
 
 closeButton.addEventListener('click', (evt) => {
   evt.preventDefault();
@@ -9,35 +13,35 @@ closeButton.addEventListener('click', (evt) => {
 });
 
 const closeOnButton = (evt) => {
-  if (evt.key === 'Escape') {
+  if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeWindow();
   }
 };
 
-function closeWindow() {
-  imageOverlay.classList.add('hidden');
+export function closeWindow() {
+  imgOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', closeOnButton);
   cleanForm();
   removeListener();
 }
 
-function openWindow() {
-  imageOverlay.classList.remove('hidden');
+export function openWindow() {
+  imgOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', closeOnButton);
-  makeListeners();
+  makeListener();
 }
 
-imageForm.addEventListener('change', (evt) => {
+imgForm.addEventListener('change', (evt) => {
   evt.preventDefault();
   openWindow();
 });
 
 function cleanForm() {
-  document.querySelector('#upload-file').value = '';
   document.querySelector('.text__hashtags').value = '';
   document.querySelector('.text__description').value = '';
-  imageForm.querySelector('.img-upload__preview img').classList = [];
+  imgForm.querySelector('.img-upload__preview img').classList = [];
+  resize(100);
 }

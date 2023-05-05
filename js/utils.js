@@ -1,16 +1,15 @@
-function getRandomPositiveInteger(a, b) {
+export function getRandomPositiveInteger(a, b) {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 }
 
-function checkStringLength(string, length) {
+export function checkStringLength(string, length) {
   return string.length <= length;
 }
 
-const getRandomArrayElement = (elements) =>
+export const getRandomArrayElement = (elements) =>
   elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-
-export {getRandomPositiveInteger, checkStringLength, getRandomArrayElement};
+export const isEscapeKey = (evt) => evt.key === 'Escape';

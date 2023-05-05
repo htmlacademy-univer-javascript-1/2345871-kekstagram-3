@@ -1,5 +1,6 @@
 
 import {checkStringLength} from './utils.js';
+import {sendData} from './api.js';
 
 const imageForm = document.querySelector('.img-upload__form');
 const regex = new RegExp('^#[а-яА-ЯA-Za-zёЁ0-9]{1,17}$');
@@ -26,7 +27,8 @@ function validateComment(element) {
 }
 
 imageForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
-    evt.preventDefault();
+  evt.preventDefault();
+  if (pristine.validate()) {
+    sendData(evt);
   }
 });

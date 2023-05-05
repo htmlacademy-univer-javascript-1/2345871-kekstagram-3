@@ -1,17 +1,16 @@
-const imageForm = document.querySelector('.img-upload__form');
-const imagePreview = imageForm.querySelector('.img-upload__preview img');
+const imgForm = document.querySelector('.img-upload__form');
 const radioButtons = document.querySelectorAll('.effects__radio');
+export const imgPreview = imgForm.querySelector('.img-upload__preview img');
 
-const changeFilter = (e) => {
-  const element = e.target;
-  e.preventDefault();
-  imagePreview.classList = [];
-  imagePreview.classList.add(`effects__preview--${element.value}`);
+const removeFilter = (evt) => {
+  evt.preventDefault();
+  imgPreview.classList = [];
 };
 
-const removeFilter = (e) => {
-  e.preventDefault();
-  imagePreview.classList = [];
+const changeFilter = (evt) => {
+  const element = evt.target.value;
+  removeFilter(evt);
+  imgPreview.classList.add(`effects__preview--${element}`);
 };
 
 const addListener = (element) => {
@@ -22,11 +21,11 @@ const addListener = (element) => {
   }
 };
 
-const makeListener = () => {
+export const makeListener = () => {
   radioButtons.forEach((element) => addListener(element));
 };
 
-const removeListener = () => {
+export const removeListener = () => {
   radioButtons.forEach((element) => {
     if (element.value === 'none') {
       element.removeEventListener('click', removeFilter);
@@ -35,5 +34,3 @@ const removeListener = () => {
     }
   });
 };
-
-export {makeListener, removeListener};

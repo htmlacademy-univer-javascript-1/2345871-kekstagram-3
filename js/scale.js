@@ -1,11 +1,11 @@
 const decrease = document.querySelector('.scale__control--smaller');
 const increase = document.querySelector('.scale__control--bigger');
 const scale = document.querySelector('.scale__control--value');
-const imagePreview = document.querySelector('.img-upload__preview');
+const imgPreview = document.querySelector('.img-upload__preview');
 
-const resize = (newScale) => {
+export const resize = (newScale) => {
   scale.value = `${newScale}%`;
-  imagePreview.style.transform = `scale(${newScale/100})`;
+  imgPreview.style.transform = `scale(${newScale/100})`;
 };
 
 decrease.addEventListener('click', () => {
