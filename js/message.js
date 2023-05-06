@@ -1,11 +1,11 @@
 import { isEscapeKey } from './utils.js';
-import { imgOverlay} from './form.js';
+import { imgOverlay, openWindow } from './form.js';
 
 const body = document.querySelector('body');
 
 const hideErrorMessage = () => {
-  const successMessage = document.querySelector('.error');
-  body.removeChild(successMessage);
+  const errorMessage = document.querySelector('.error');
+  body.removeChild(errorMessage);
   document.querySelector(imgOverlay).classList.remove('hidden');
   body.classList.add('modal-open');
 };
@@ -22,6 +22,8 @@ export const showErrorMessage = () => {
   const errorButton = errorTemplate.querySelector('.error__button');
   body.append(errorTemplate);
   errorButton.addEventListener('click', hideErrorMessage);
+  errorButton.addEventListener('click', openWindow);
+  body.addEventListener('click', hideErrorMessage);
   document.addEventListener('keydown', errorButtonListener);
 };
 
@@ -42,5 +44,6 @@ export const showSuccessMessage = () => {
   const successButton = successTemplate.querySelector('.success__button');
   body.append(successTemplate);
   successButton.addEventListener('click', hideSuccessMessage);
+  body.addEventListener('click', hideSuccessMessage);
   document.addEventListener('keydown', successButtonListener);
 };

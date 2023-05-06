@@ -1,6 +1,6 @@
 const imgForm = document.querySelector('.img-upload__form');
 const radioButtons = document.querySelectorAll('.effects__radio');
-export const imgPreview = imgForm.querySelector('.img-upload__preview img');
+const imgPreview = imgForm.querySelector('.img-upload__preview img');
 
 const removeFilter = (evt) => {
   evt.preventDefault();

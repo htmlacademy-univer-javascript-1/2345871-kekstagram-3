@@ -1,11 +1,10 @@
+import { checkStringLength } from './utils.js';
+import { sendData } from './api.js';
 
-import {checkStringLength} from './utils.js';
-import {sendData} from './api.js';
-
-const imageForm = document.querySelector('.img-upload__form');
+const imgForm = document.querySelector('.img-upload__form');
 const regex = new RegExp('^#[а-яА-ЯA-Za-zёЁ0-9]{1,17}$');
 
-const pristine = new Pristine(imageForm, {
+const pristine = new Pristine(imgForm, {
   classTo: 'img-upload__text',
   errorClass: 'form__item--invalid',
   successClass: 'form__item--valid',
@@ -26,7 +25,7 @@ function validateComment(element) {
   return !checkStringLength(element, 19) && checkStringLength(element, 140);
 }
 
-imageForm.addEventListener('submit', (evt) => {
+imgForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   if (pristine.validate()) {
     sendData(evt);
